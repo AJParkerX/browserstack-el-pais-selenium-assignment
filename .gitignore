@@ -1,0 +1,5 @@
+.env
+article_images/
+__pycache__/
+bs_env/
+*.pyc
