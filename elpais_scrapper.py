@@ -17,7 +17,7 @@ from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from dotenv import load_dotenv
 load_dotenv()
 
-# ------- credentials & constants -------
+# credentials & constants 
 
 BROWSERSTACK_USERNAME = os.environ.get("BROWSERSTACK_USERNAME", "YOUR_BS_USERNAME")
 BROWSERSTACK_ACCESS_KEY = os.environ.get("BROWSERSTACK_ACCESS_KEY", "YOUR_BS_ACCESS_KEY")
@@ -29,7 +29,7 @@ IMAGES_DIR = "article_images"
 TARGET_URL  = "https://elpais.com"
 OPINION_URL = "https://elpais.com/opinion/"
 
-# ------- browser/device matrix -------
+# browser/device matrix 
 
 BS_CAPABILITIES = [
     {
@@ -70,7 +70,7 @@ BS_CAPABILITIES = [
 ]
 
 
-# ------- drivers -------
+# drivers
 
 def get_local_driver():
     opts = ChromeOptions()
@@ -116,7 +116,7 @@ def get_browserstack_driver(cap: dict):
     return driver
 
 
-# ------- cookie banner -------
+# cookie banner 
 
 def dismiss_consent(driver):
     selectors = [
@@ -137,7 +137,7 @@ def dismiss_consent(driver):
             pass
 
 
-# ------- scraping -------
+# scraping 
 
 def scrape_opinion_articles(driver) -> list[dict]:
     driver.get(OPINION_URL)
@@ -224,7 +224,7 @@ def scrape_opinion_articles(driver) -> list[dict]:
     return articles
 
 
-# ------- image download -------
+# image download
 
 def download_image(url: str, idx: int) -> str | None:
     os.makedirs(IMAGES_DIR, exist_ok=True)
@@ -242,7 +242,7 @@ def download_image(url: str, idx: int) -> str | None:
         return None
 
 
-# ------- translation -------
+# translation
 
 def translate_title(spanish_title: str) -> str:
     if RAPIDAPI_KEY == "YOUR_RAPIDAPI_KEY":
@@ -266,7 +266,7 @@ def translate_title(spanish_title: str) -> str:
         return spanish_title
 
 
-# ------- word frequency -------
+# word frequency 
 
 STOPWORDS = {
     "the", "a", "an", "and", "or", "but", "in", "on", "at", "to", "for",
@@ -285,7 +285,7 @@ def analyze_headers(translated_titles: list[str]) -> dict[str, int]:
     return repeated
 
 
-# ------- main test flow -------
+# main test flow
 
 def run_test(driver, session_label: str = "local"):
     print(f"\n{'='*60}")
@@ -359,7 +359,7 @@ def run_test(driver, session_label: str = "local"):
         driver.quit()
 
 
-# ------- browserstack parallel runner -------
+# browserstack parallel runner
 
 def run_browserstack_thread(cap: dict):
     label = cap.get("sessionName", "BS Session")
@@ -381,7 +381,7 @@ def run_browserstack_parallel():
     print("\n✅  All BrowserStack parallel sessions completed.")
 
 
-# ------- entry point -------
+# entry point
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="El País BrowserStack Test")
