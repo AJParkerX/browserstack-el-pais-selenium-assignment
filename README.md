@@ -10,7 +10,7 @@ Scrapes the first 5 articles from the El País Opinion section, translates the t
 pip install -r requirements.txt
 ```
 
-You'll also need ChromeDriver installed locally and matching your Chrome version.
+ChromeDriver should be installed locally and matched with the Chrome version.
 
 ---
 
